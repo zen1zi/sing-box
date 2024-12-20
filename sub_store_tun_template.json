@@ -25,7 +25,7 @@
       {
         "tag": "local_dns",
         "address": "https://223.5.5.5/dns-query",
-        "detour": "direct"
+        "detour": "Direct"
       }
     ],
     "rules": [
@@ -41,11 +41,11 @@
         "server": "local_dns"
       },
       {
-        "clash_mode": "direct",
+        "clash_mode": "Direct",
         "server": "local_dns"
       },
       {
-        "clash_mode": "global",
+        "clash_mode": "Global",
         "server": "proxy_dns"
       },
       {
@@ -74,340 +74,340 @@
       "tag": "Telegram",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "EU",
+        "Singapore",
+        "United States",
+        "Europe",
         "Auto",
         "Proxy"
       ],
-      "default": "SG"
+      "default": "Singapore"
     },
     {
       "tag": "YouTube",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy"
       ],
-      "default": "SG"
+      "default": "Singapore"
     },
     {
       "tag": "Bilibili",
       "type": "selector",
       "outbounds": [
-        "direct",
-        "HK",
-        "TW"
+        "Direct",
+        "Hong Kong",
+        "Taiwan"
       ],
-      "default": "direct"
+      "default": "Direct"
     },
     {
       "tag": "TikTok",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy"
       ],
-      "default": "SG"
+      "default": "Singapore"
     },
     {
       "tag": "Emby",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy",
-        "direct"
+        "Direct"
       ],
-      "default": "HK"
+      "default": "Hong Kong"
     },
     {
       "tag": "Netflix",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy"
       ],
-      "default": "SG"
+      "default": "Singapore"
     },
     {
       "tag": "Disney+",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy"
       ],
-      "default": "SG"
+      "default": "Singapore"
     },
     {
       "tag": "Spotify",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy",
-        "direct"
+        "Direct"
       ],
-      "default": "TW"
+      "default": "Taiwan"
     },
     {
       "tag": "Slack",
       "type": "selector",
       "outbounds": [
-        "HK",
+        "Hong Kong",
         "Auto",
         "Proxy",
-        "direct"
+        "Direct"
       ],
-      "default": "HK"
+      "default": "Hong Kong"
     },
     {
       "tag": "LinkedIn",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy"
       ],
-      "default": "SG"
+      "default": "Singapore"
     },
     {
       "tag": "OpenAI",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy"
       ],
-      "default": "SG"
+      "default": "Singapore"
     },
     {
       "tag": "Github",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy"
       ],
-      "default": "SG"
+      "default": "Singapore"
     },
     {
       "tag": "Dropbox",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy"
       ],
-      "default": "HK"
+      "default": "Hong Kong"
     },
     {
       "tag": "PayPal",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy",
-        "direct"
+        "Direct"
       ],
-      "default": "US"
+      "default": "United States"
     },
     {
       "tag": "Spark",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy"
       ],
-      "default": "HK"
+      "default": "Hong Kong"
     },
     {
       "tag": "Nintendo",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy",
-        "direct"
+        "Direct"
       ],
-      "default": "JP"
+      "default": "Japan"
     },
     {
       "tag": "Apple",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy",
-        "direct"
+        "Direct"
       ],
-      "default": "SG"
+      "default": "Singapore"
     },
     {
       "tag": "Google",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy"
       ],
-      "default": "SG"
+      "default": "Singapore"
     },
     {
       "tag": "Microsoft",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy",
-        "direct"
+        "Direct"
       ],
-      "default": "SG"
+      "default": "Singapore"
     },
     {
       "tag": "Global",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy",
-        "direct"
+        "Direct"
       ],
-      "default": "SG"
+      "default": "Singapore"
     },
     {
       "tag": "China",
       "type": "selector",
       "outbounds": [
-        "SG",
-        "US",
-        "TW",
-        "HK",
-        "JP",
-        "EU",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
         "Auto",
         "Proxy",
-        "direct"
+        "Direct"
       ],
-      "default": "direct"
+      "default": "Direct"
     },
     {
-      "tag": "SG",
+      "tag": "Singapore",
       "type": "selector",
       "outbounds": []
     },
     {
-      "tag": "US",
+      "tag": "United States",
       "type": "selector",
       "outbounds": []
     },
     {
-      "tag": "TW",
+      "tag": "Taiwan",
       "type": "selector",
       "outbounds": []
     },
     {
-      "tag": "HK",
+      "tag": "Hong Kong",
       "type": "selector",
       "outbounds": []
     },
     {
-      "tag": "JP",
+      "tag": "Japan",
       "type": "selector",
       "outbounds": []
     },
     {
-      "tag": "EU",
+      "tag": "Europe",
       "type": "selector",
       "outbounds": []
     },
@@ -426,7 +426,7 @@
     },
     {
       "type": "direct",
-      "tag": "direct"
+      "tag": "Direct"
     },
     {
       "type": "dns",
@@ -444,11 +444,11 @@
         "outbound": "dns-out"
       },
       {
-        "clash_mode": "direct",
-        "outbound": "direct"
+        "clash_mode": "Direct",
+        "outbound": "Direct"
       },
       {
-        "clash_mode": "global",
+        "clash_mode": "Global",
         "outbound": "Proxy"
       },
       {
@@ -460,7 +460,7 @@
           "caiso.com",
           "eton.sh"
         ],
-        "outbound": "US"
+        "outbound": "United States"
       },
       {
         "domain_suffix": [
@@ -476,7 +476,7 @@
           "zenitsu.io",
           "zenitsu.network"
         ],
-        "outbound": "EU"
+        "outbound": "Europe"
       },
       {
         "rule_set": [
