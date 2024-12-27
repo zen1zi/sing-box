@@ -71,17 +71,85 @@
   ],
   "outbounds": [
     {
-      "tag": "Telegram",
+      "tag": "Slack",
+      "type": "selector",
+      "outbounds": [
+        "Hong Kong",
+        "Global",
+        "Auto",
+        "Proxy",
+        "Direct"
+      ],
+      "default": "Hong Kong"
+    },
+    {
+      "tag": "LinkedIn",
       "type": "selector",
       "outbounds": [
         "Singapore",
         "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
         "Europe",
         "Others",
+        "Global",
         "Auto",
         "Proxy"
       ],
       "default": "Singapore"
+    },
+    {
+      "tag": "Dropbox",
+      "type": "selector",
+      "outbounds": [
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
+        "Others",
+        "Global",
+        "Auto",
+        "Proxy"
+      ],
+      "default": "Hong Kong"
+    },
+    {
+      "tag": "PayPal",
+      "type": "selector",
+      "outbounds": [
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
+        "Others",
+        "Global",
+        "Auto",
+        "Proxy",
+        "Direct"
+      ],
+      "default": "United States"
+    },
+    {
+      "tag": "Spark",
+      "type": "selector",
+      "outbounds": [
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Europe",
+        "Others",
+        "Global",
+        "Auto",
+        "Proxy"
+      ],
+      "default": "Hong Kong"
     },
     {
       "tag": "YouTube",
@@ -94,6 +162,7 @@
         "Japan",
         "Europe",
         "Others",
+        "Global",
         "Auto",
         "Proxy"
       ],
@@ -120,10 +189,11 @@
         "Japan",
         "Europe",
         "Others",
+        "Global",
         "Auto",
         "Proxy"
       ],
-      "default": "Singapore"
+      "default": "Global"
     },
     {
       "tag": "Emby",
@@ -136,6 +206,7 @@
         "Japan",
         "Europe",
         "Others",
+        "Global",
         "Auto",
         "Proxy",
         "Direct"
@@ -153,6 +224,7 @@
         "Japan",
         "Europe",
         "Others",
+        "Global",
         "Auto",
         "Proxy"
       ],
@@ -169,6 +241,7 @@
         "Japan",
         "Europe",
         "Others",
+        "Global",
         "Auto",
         "Proxy"
       ],
@@ -185,6 +258,7 @@
         "Japan",
         "Europe",
         "Others",
+        "Global",
         "Auto",
         "Proxy",
         "Direct"
@@ -192,18 +266,7 @@
       "default": "Taiwan"
     },
     {
-      "tag": "Slack",
-      "type": "selector",
-      "outbounds": [
-        "Hong Kong",
-        "Auto",
-        "Proxy",
-        "Direct"
-      ],
-      "default": "Hong Kong"
-    },
-    {
-      "tag": "LinkedIn",
+      "tag": "Nintendo",
       "type": "selector",
       "outbounds": [
         "Singapore",
@@ -213,6 +276,22 @@
         "Japan",
         "Europe",
         "Others",
+        "Global",
+        "Auto",
+        "Proxy",
+        "Direct"
+      ],
+      "default": "Japan"
+    },
+    {
+      "tag": "Telegram",
+      "type": "selector",
+      "outbounds": [
+        "Singapore",
+        "United States",
+        "Europe",
+        "Others",
+        "Global",
         "Auto",
         "Proxy"
       ],
@@ -229,10 +308,11 @@
         "Japan",
         "Europe",
         "Others",
+        "Global",
         "Auto",
         "Proxy"
       ],
-      "default": "Singapore"
+      "default": "Global"
     },
     {
       "tag": "Github",
@@ -245,76 +325,11 @@
         "Japan",
         "Europe",
         "Others",
+        "Global",
         "Auto",
         "Proxy"
       ],
-      "default": "Singapore"
-    },
-    {
-      "tag": "Dropbox",
-      "type": "selector",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Europe",
-        "Others",
-        "Auto",
-        "Proxy"
-      ],
-      "default": "Hong Kong"
-    },
-    {
-      "tag": "PayPal",
-      "type": "selector",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Europe",
-        "Others",
-        "Auto",
-        "Proxy",
-        "Direct"
-      ],
-      "default": "United States"
-    },
-    {
-      "tag": "Spark",
-      "type": "selector",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Europe",
-        "Others",
-        "Auto",
-        "Proxy"
-      ],
-      "default": "Hong Kong"
-    },
-    {
-      "tag": "Nintendo",
-      "type": "selector",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Europe",
-        "Others",
-        "Auto",
-        "Proxy",
-        "Direct"
-      ],
-      "default": "Japan"
+      "default": "Global"
     },
     {
       "tag": "Apple",
@@ -327,11 +342,12 @@
         "Japan",
         "Europe",
         "Others",
+        "Global",
         "Auto",
         "Proxy",
         "Direct"
       ],
-      "default": "Singapore"
+      "default": "Global"
     },
     {
       "tag": "Google",
@@ -344,10 +360,11 @@
         "Japan",
         "Europe",
         "Others",
+        "Global",
         "Auto",
         "Proxy"
       ],
-      "default": "Singapore"
+      "default": "Global"
     },
     {
       "tag": "Microsoft",
@@ -360,11 +377,12 @@
         "Japan",
         "Europe",
         "Others",
+        "Global",
         "Auto",
         "Proxy",
         "Direct"
       ],
-      "default": "Singapore"
+      "default": "Global"
     },
     {
       "tag": "Global",
@@ -394,6 +412,7 @@
         "Japan",
         "Europe",
         "Others",
+        "Global",
         "Auto",
         "Proxy",
         "Direct"
@@ -446,7 +465,7 @@
       "outbounds": [],
       "url": "http://www.gstatic.com/generate_204",
       "interval": "10m",
-      "tolerance": 50
+      "tolerance": 5
     },
     {
       "type": "direct",
