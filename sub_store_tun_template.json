@@ -1,7 +1,7 @@
 {
     "dns": {
         "disable_cache": true,
-        "final": "local_dns",
+        "final": "proxy_dns",
         "rules": [
             {
                 "disable_cache": true,
