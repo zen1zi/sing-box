@@ -9,13 +9,7 @@
                     "!dns-out"
                 ],
                 "server": "local_dns"
-            },
-            {
-                "rule_set": [
-                    "geosite-cn"
-                ],
-                "server": "local_dns"
-            },
+            },            
             {
                 "clash_mode": "Direct",
                 "server": "local_dns"
@@ -23,6 +17,12 @@
             {
                 "clash_mode": "Global",
                 "server": "proxy_dns"
+            },
+            {
+                "rule_set": [
+                    "geosite-cn"
+                ],
+                "server": "local_dns"
             },
             {
                 "rule_set": [
