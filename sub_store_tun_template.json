@@ -1,13 +1,12 @@
 {
+    "log": {
+        "level": "debug",
+        "timestamp": true
+    },
     "dns": {
-        "disable_cache": true,
-        "final": "proxy_dns",
         "rules": [
             {
-                "disable_cache": true,
-                "outbound": [
-                    "!dns-out"
-                ],
+                "outbound": "any",
                 "server": "local_dns"
             },            
             {
@@ -43,6 +42,10 @@
                 "tag": "local_dns"
             }
         ],
+        "disable_cache": false,
+        "disable_expire": false,
+        "independent_cache": false,
+        "final": "proxy_dns",
         "strategy": "prefer_ipv4"
     },
     "experimental": {
@@ -67,10 +70,6 @@
             "type": "tun"
         }
     ],
-    "log": {
-        "level": "debug",
-        "timestamp": true
-    },
     "outbounds": [
         {
             "default": "Direct",
