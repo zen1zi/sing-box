@@ -66,7 +66,6 @@
                 "172.20.0.1/30"
             ],
             "auto_route": true,
-            "sniff": true,
             "type": "tun"
         }
     ],
@@ -435,10 +434,6 @@
         {
             "tag": "Direct",
             "type": "direct"
-        },
-        {
-            "tag": "dns-out",
-            "type": "dns"
         }
     ],
     "route": {
@@ -616,10 +611,11 @@
         ],
         "rules": [
             {
-                "outbound": "dns-out",
-                "protocol": [
-                    "dns"
-                ]
+                "action": "sniff"
+            },
+            {
+                "protocol": "dns",
+                "action": "hijack-dns"
             },
             {
                 "clash_mode": "Direct",
