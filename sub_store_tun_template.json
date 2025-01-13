@@ -640,7 +640,8 @@
                 "domain_suffix": [
                     "bili.rip",
                     "micu.hk",
-                    "xmsl.org"
+                    "xmsl.org",
+                    "as174.de"
                 ],
                 "outbound": "Emby"
             },
