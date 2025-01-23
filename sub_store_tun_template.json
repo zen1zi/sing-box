@@ -204,7 +204,7 @@
                 "Auto",
                 "Proxy"
             ],
-            "tag": "OpenAI",
+            "tag": "AIGC",
             "type": "selector"
         },
         {
@@ -533,10 +533,10 @@
             },
             {
                 "download_detour": "Proxy",
-                "format": "binary",
-                "tag": "geosite-openai",
+                "format": "source",
+                "tag": "ruleset-ai",
                 "type": "remote",
-                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/openai.srs"
+                "url": "https://ruleset.skk.moe/sing-box/non_ip/ai.json"
             },
             {
                 "download_detour": "Proxy",
@@ -735,9 +735,9 @@
                 ]
             },
             {
-                "outbound": "OpenAI",
+                "outbound": "AIGC",
                 "rule_set": [
-                    "geosite-openai"
+                    "ruleset-ai"
                 ]
             },
             {
