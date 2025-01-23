@@ -192,7 +192,7 @@
             "type": "selector"
         },
         {
-            "default": "Proxy",
+            "default": "United States",
             "outbounds": [
                 "Singapore",
                 "United States",
