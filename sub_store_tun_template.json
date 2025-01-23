@@ -4,11 +4,23 @@
         "timestamp": true
     },
     "dns": {
+        "servers": [
+            {
+                "tag": "proxy_dns",
+                "address": "tls://8.8.8.8",
+                "detour": "Proxy"
+            },
+            {
+                "tag": "local_dns",
+                "address": "https://223.5.5.5/dns-query",
+                "detour": "Direct"
+            }
+        ],
         "rules": [
             {
                 "outbound": "any",
                 "server": "local_dns"
-            },            
+            },
             {
                 "clash_mode": "Direct",
                 "server": "local_dns"
@@ -28,18 +40,6 @@
                     "geosite-geolocation-!cn"
                 ],
                 "server": "proxy_dns"
-            }
-        ],
-        "servers": [
-            {
-                "address": "tls://8.8.8.8",
-                "detour": "Proxy",
-                "tag": "proxy_dns"
-            },
-            {
-                "address": "https://223.5.5.5/dns-query",
-                "detour": "Direct",
-                "tag": "local_dns"
             }
         ],
         "disable_cache": false,
@@ -71,16 +71,18 @@
     ],
     "outbounds": [
         {
+            "tag": "Bilibili",
+            "type": "selector",
             "default": "Direct",
             "outbounds": [
                 "Direct",
                 "Hong Kong",
                 "Taiwan"
-            ],
-            "tag": "Bilibili",
-            "type": "selector"
+            ]
         },
         {
+            "tag": "Emby",
+            "type": "selector",
             "default": "Hong Kong",
             "outbounds": [
                 "Singapore",
@@ -88,32 +90,17 @@
                 "Taiwan",
                 "Hong Kong",
                 "Japan",
+                "Korea",
                 "Europe",
                 "Others",
                 "Auto",
                 "Proxy",
                 "Direct"
-            ],
-            "tag": "Emby",
-            "type": "selector"
+            ]
         },
         {
-            "default": "Singapore",
-            "outbounds": [
-                "Singapore",
-                "United States",
-                "Taiwan",
-                "Hong Kong",
-                "Japan",
-                "Europe",
-                "Others",
-                "Auto",
-                "Proxy"
-            ],
             "tag": "Netflix",
-            "type": "selector"
-        },
-        {
+            "type": "selector",
             "default": "Singapore",
             "outbounds": [
                 "Singapore",
@@ -121,15 +108,33 @@
                 "Taiwan",
                 "Hong Kong",
                 "Japan",
+                "Korea",
                 "Europe",
                 "Others",
                 "Auto",
                 "Proxy"
-            ],
-            "tag": "Disney+",
-            "type": "selector"
+            ]
         },
         {
+            "tag": "Disney+",
+            "type": "selector",
+            "default": "Singapore",
+            "outbounds": [
+                "Singapore",
+                "United States",
+                "Taiwan",
+                "Hong Kong",
+                "Japan",
+                "Korea",
+                "Europe",
+                "Others",
+                "Auto",
+                "Proxy"
+            ]
+        },
+        {
+            "tag": "Spotify",
+            "type": "selector",
             "default": "Taiwan",
             "outbounds": [
                 "Singapore",
@@ -137,32 +142,17 @@
                 "Taiwan",
                 "Hong Kong",
                 "Japan",
+                "Korea",
                 "Europe",
                 "Others",
                 "Auto",
                 "Proxy",
                 "Direct"
-            ],
-            "tag": "Spotify",
-            "type": "selector"
+            ]
         },
         {
-            "default": "Proxy",
-            "outbounds": [
-                "Singapore",
-                "United States",
-                "Taiwan",
-                "Hong Kong",
-                "Japan",
-                "Europe",
-                "Others",
-                "Auto",
-                "Proxy"
-            ],
             "tag": "TikTok",
-            "type": "selector"
-        },
-        {
+            "type": "selector",
             "default": "Proxy",
             "outbounds": [
                 "Singapore",
@@ -170,28 +160,46 @@
                 "Taiwan",
                 "Hong Kong",
                 "Japan",
+                "Korea",
                 "Europe",
                 "Others",
                 "Auto",
                 "Proxy"
-            ],
+            ]
+        },
+        {
             "tag": "YouTube",
-            "type": "selector"
-        },
-        {
-            "default": "Singapore",
+            "type": "selector",
+            "default": "Proxy",
             "outbounds": [
                 "Singapore",
                 "United States",
+                "Taiwan",
+                "Hong Kong",
+                "Japan",
+                "Korea",
                 "Europe",
                 "Others",
                 "Auto",
                 "Proxy"
-            ],
+            ]
+        },
+        {
             "tag": "Telegram",
-            "type": "selector"
+            "type": "selector",
+            "default": "Singapore",
+            "outbounds": [
+                "Singapore",
+                "United States",
+                "Europe",
+                "Others",
+                "Auto",
+                "Proxy"
+            ]
         },
         {
+            "tag": "AIGC",
+            "type": "selector",
             "default": "United States",
             "outbounds": [
                 "Singapore",
@@ -199,31 +207,16 @@
                 "Taiwan",
                 "Hong Kong",
                 "Japan",
+                "Korea",
                 "Europe",
                 "Others",
                 "Auto",
                 "Proxy"
-            ],
-            "tag": "AIGC",
-            "type": "selector"
+            ]
         },
         {
-            "default": "Proxy",
-            "outbounds": [
-                "Singapore",
-                "United States",
-                "Taiwan",
-                "Hong Kong",
-                "Japan",
-                "Europe",
-                "Others",
-                "Auto",
-                "Proxy"
-            ],
             "tag": "Github",
-            "type": "selector"
-        },
-        {
+            "type": "selector",
             "default": "Proxy",
             "outbounds": [
                 "Singapore",
@@ -231,16 +224,16 @@
                 "Taiwan",
                 "Hong Kong",
                 "Japan",
+                "Korea",
                 "Europe",
                 "Others",
                 "Auto",
-                "Proxy",
-                "Direct"
-            ],
+                "Proxy"
+            ]
+        },
+        {
             "tag": "Apple",
-            "type": "selector"
-        },
-        {
+            "type": "selector",
             "default": "Proxy",
             "outbounds": [
                 "Singapore",
@@ -248,15 +241,17 @@
                 "Taiwan",
                 "Hong Kong",
                 "Japan",
+                "Korea",
                 "Europe",
                 "Others",
                 "Auto",
-                "Proxy"
-            ],
+                "Proxy",
+                "Direct"
+            ]
+        },
+        {
             "tag": "Google",
-            "type": "selector"
-        },
-        {
+            "type": "selector",
             "default": "Proxy",
             "outbounds": [
                 "Singapore",
@@ -264,43 +259,45 @@
                 "Taiwan",
                 "Hong Kong",
                 "Japan",
+                "Korea",
                 "Europe",
                 "Others",
                 "Auto",
-                "Proxy",
-                "Direct"
-            ],
+                "Proxy"
+            ]
+        },
+        {
             "tag": "Microsoft",
-            "type": "selector"
+            "type": "selector",
+            "default": "Proxy",
+            "outbounds": [
+                "Singapore",
+                "United States",
+                "Taiwan",
+                "Hong Kong",
+                "Japan",
+                "Korea",
+                "Europe",
+                "Others",
+                "Auto",
+                "Proxy",
+                "Direct"
+            ]
         },
         {
+            "tag": "Slack",
+            "type": "selector",
             "default": "Hong Kong",
             "outbounds": [
                 "Hong Kong",
                 "Auto",
                 "Proxy",
                 "Direct"
-            ],
-            "tag": "Slack",
-            "type": "selector"
+            ]
         },
         {
-            "default": "Hong Kong",
-            "outbounds": [
-                "Singapore",
-                "United States",
-                "Taiwan",
-                "Hong Kong",
-                "Japan",
-                "Europe",
-                "Others",
-                "Auto",
-                "Proxy"
-            ],
             "tag": "Dropbox",
-            "type": "selector"
-        },
-        {
+            "type": "selector",
             "default": "Hong Kong",
             "outbounds": [
                 "Singapore",
@@ -308,15 +305,33 @@
                 "Taiwan",
                 "Hong Kong",
                 "Japan",
+                "Korea",
                 "Europe",
                 "Others",
                 "Auto",
                 "Proxy"
-            ],
-            "tag": "Spark",
-            "type": "selector"
+            ]
         },
         {
+            "tag": "Spark",
+            "type": "selector",
+            "default": "Hong Kong",
+            "outbounds": [
+                "Singapore",
+                "United States",
+                "Taiwan",
+                "Hong Kong",
+                "Japan",
+                "Korea",
+                "Europe",
+                "Others",
+                "Auto",
+                "Proxy"
+            ]
+        },
+        {
+            "tag": "LinkedIn",
+            "type": "selector",
             "default": "Singapore",
             "outbounds": [
                 "Singapore",
@@ -324,15 +339,16 @@
                 "Taiwan",
                 "Hong Kong",
                 "Japan",
+                "Korea",
                 "Europe",
                 "Others",
                 "Auto",
                 "Proxy"
-            ],
-            "tag": "LinkedIn",
-            "type": "selector"
+            ]
         },
         {
+            "tag": "PayPal",
+            "type": "selector",
             "default": "United States",
             "outbounds": [
                 "Singapore",
@@ -340,16 +356,17 @@
                 "Taiwan",
                 "Hong Kong",
                 "Japan",
+                "Korea",
                 "Europe",
                 "Others",
                 "Auto",
                 "Proxy",
                 "Direct"
-            ],
-            "tag": "PayPal",
-            "type": "selector"
+            ]
         },
         {
+            "tag": "Nintendo",
+            "type": "selector",
             "default": "Japan",
             "outbounds": [
                 "Singapore",
@@ -357,79 +374,76 @@
                 "Taiwan",
                 "Hong Kong",
                 "Japan",
+                "Korea",
                 "Europe",
                 "Others",
                 "Auto",
                 "Proxy",
                 "Direct"
-            ],
-            "tag": "Nintendo",
-            "type": "selector"
+            ]
         },
         {
+            "tag": "China",
+            "type": "selector",
             "default": "Direct",
             "outbounds": [
-                "Singapore",
-                "United States",
-                "Taiwan",
-                "Hong Kong",
-                "Japan",
-                "Europe",
-                "Others",
+                "Direct",
                 "Auto",
-                "Proxy",
-                "Direct"
-            ],
-            "tag": "China",
-            "type": "selector"
+                "Proxy"
+            ]
         },
         {
-            "outbounds": [],
             "tag": "Singapore",
-            "type": "selector"
+            "type": "selector",
+            "outbounds": []
         },
         {
-            "outbounds": [],
             "tag": "United States",
-            "type": "selector"
+            "type": "selector",
+            "outbounds": []
         },
         {
-            "outbounds": [],
             "tag": "Taiwan",
-            "type": "selector"
+            "type": "selector",
+            "outbounds": []
         },
         {
-            "outbounds": [],
             "tag": "Hong Kong",
-            "type": "selector"
+            "type": "selector",
+            "outbounds": []
         },
         {
-            "outbounds": [],
             "tag": "Japan",
-            "type": "selector"
+            "type": "selector",
+            "outbounds": []
         },
         {
-            "outbounds": [],
+            "tag": "Korea",
+            "type": "selector",
+            "outbounds": []
+        },
+        {
             "tag": "Europe",
-            "type": "selector"
+            "type": "selector",
+            "outbounds": []
         },
         {
-            "outbounds": [],
             "tag": "Others",
-            "type": "selector"
+            "type": "selector",
+            "outbounds": []
         },
         {
-            "outbounds": [],
             "tag": "Proxy",
-            "type": "selector"
+            "type": "selector",
+            "outbounds": []
         },
         {
-            "interval": "10m",
-            "outbounds": [],
             "tag": "Auto",
-            "tolerance": 1,
             "type": "urltest",
-            "url": "http://www.gstatic.com/generate_204"
+            "interval": "10m",
+            "tolerance": 1,
+            "url": "http://www.gstatic.com/generate_204",
+            "outbounds": []
         },
         {
             "tag": "Direct",
