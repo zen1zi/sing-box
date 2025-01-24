@@ -452,14 +452,13 @@
     ],
     "route": {
         "auto_detect_interface": true,
-        "final": "Proxy",
         "rule_set": [
             {
-                "download_detour": "Proxy",
-                "format": "binary",
                 "tag": "geosite-linkedin",
                 "type": "remote",
-                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/linkedin.srs"
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/linkedin.srs",
+                "download_detour": "Proxy"
             },
             {
                 "download_detour": "Proxy",
@@ -640,165 +639,113 @@
                 "outbound": "Proxy"
             },
             {
-                "domain_suffix": [
-                    "misoenergy.org",
-                    "ercot.com",
-                    "spp.org",
-                    "pjm.com",
-                    "caiso.com",
-                    "pge.com",
-                    "pseg.com",
-                    "eton.sh"
-                ],
+                "rule_set": ["ruleset-iso"],
                 "outbound": "United States"
             },
             {
-                "domain_suffix": [
-                    "bili.rip",
-                    "micu.hk",
-                    "xmsl.org",
-                    "as174.de"
-                ],
+                "rule_set": ["ruleset-emby"],
                 "outbound": "Emby"
             },
             {
-                "domain_suffix": [
-                    "nodeseek.com",
-                    "lowendtalk.com",
-                    "zenitsu.io",
-                    "zenitsu.network"
-                ],
+                "rule_set": ["ruleset-eu"],
                 "outbound": "Europe"
             },
             {
-                "outbound": "LinkedIn",
-                "rule_set": [
-                    "geosite-linkedin"
-                ]
+                "rule_set": ["geosite-linkedin"],
+                "outbound": "LinkedIn"
             },
             {
-                "outbound": "Slack",
-                "rule_set": [
-                    "geosite-slack"
-                ]
+                "rule_set": ["geosite-slack"],
+                "outbound": "Slack"
             },
             {
-                "outbound": "PayPal",
-                "rule_set": [
-                    "geosite-paypal"
-                ]
+                "rule_set": ["geosite-paypal"],
+                "outbound": "PayPal"
             },
             {
-                "domain_suffix": [
-                    "amplitude.com",
-                    "firebaseio.com",
-                    "hockeyapp.net",
-                    "readdle.com",
-                    "smartmailcloud.com"
-                ],
+                "rule_set": ["ruleset-spark"],
                 "outbound": "Spark"
             },
             {
-                "outbound": "Dropbox",
-                "rule_set": [
-                    "geosite-dropbox"
-                ]
+                "rule_set": ["geosite-dropbox"],
+                "outbound": "Dropbox"
             },
             {
-                "outbound": "Telegram",
                 "rule_set": [
                     "geoip-telegram",
                     "geosite-telegram"
-                ]
+                ],
+                "outbound": "Telegram"
             },
             {
-                "outbound": "YouTube",
-                "rule_set": [
-                    "geosite-youtube"
-                ]
+                "rule_set": ["geosite-youtube"],
+                "outbound": "YouTube"
             },
             {
-                "outbound": "Bilibili",
-                "rule_set": [
-                    "geosite-bilibili"
-                ]
+                "rule_set": ["geosite-bilibili"],
+                "outbound": "Bilibili"
             },
             {
-                "outbound": "Spotify",
-                "rule_set": [
-                    "geosite-spotify"
-                ]
+                "rule_set": ["geosite-spotify"],
+                "outbound": "Spotify"
             },
             {
-                "outbound": "TikTok",
-                "rule_set": [
-                    "geosite-tiktok"
-                ]
+                "rule_set": ["geosite-tiktok"],
+                "outbound": "TikTok"
             },
             {
-                "outbound": "Netflix",
                 "rule_set": [
                     "geoip-netflix",
                     "geosite-netflix"
-                ]
+                ],
+                "outbound": "Netflix"
             },
             {
-                "outbound": "Disney+",
-                "rule_set": [
-                    "geosite-disney"
-                ]
+                "rule_set": ["geosite-disney"],
+                "outbound": "Disney+"
             },
             {
-                "outbound": "AIGC",
-                "rule_set": [
-                    "ruleset-ai"
-                ]
+                "rule_set": ["ruleset-ai"],
+                "outbound": "AIGC"
             },
             {
-                "outbound": "Github",
-                "rule_set": [
-                    "geosite-github"
-                ]
+                "rule_set": ["geosite-github"],
+                "outbound": "Github"
             },
             {
-                "outbound": "Nintendo",
-                "rule_set": [
-                    "geosite-nintendo"
-                ]
+                "rule_set": ["geosite-nintendo"],
+                "outbound": "Nintendo"
             },
             {
-                "outbound": "Apple",
                 "rule_set": [
                     "geoip-apple",
                     "geosite-apple"
-                ]
+                ],
+                "outbound": "Apple"
             },
             {
-                "outbound": "Google",
                 "rule_set": [
                     "geoip-google",
                     "geosite-google"
-                ]
+                ],
+                "outbound": "Google"
             },
             {
-                "outbound": "Microsoft",
-                "rule_set": [
-                    "geosite-microsoft"
-                ]
+                "rule_set": ["geosite-microsoft"],
+                "outbound": "Microsoft"
             },
             {
-                "outbound": "Proxy",
-                "rule_set": [
-                    "geosite-geolocation-!cn"
-                ]
+                "rule_set": ["geosite-geolocation-!cn"],
+                "outbound": "Proxy"
             },
             {
-                "outbound": "China",
                 "rule_set": [
                     "geoip-cn",
                     "geosite-cn"
-                ]
+                ],
+                "outbound": "China"
             }
-        ]
+        ],
+        "final": "Proxy"
     }
 }
