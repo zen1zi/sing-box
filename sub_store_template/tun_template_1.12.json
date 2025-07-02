@@ -34,7 +34,7 @@
         "disable_expire": false,
         "independent_cache": false,
         "final": "proxy_dns",
-        "domain_strategy": "prefer_ipv4"
+        "strategy": "prefer_ipv4"
     },
     "experimental": {
         "cache_file": {
