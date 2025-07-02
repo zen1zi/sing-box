@@ -7,12 +7,14 @@
         "servers": [
             {
                 "tag": "proxy_dns",
-                "address": "tls://8.8.8.8",
+                "type": "tls",
+                "server": "8.8.8.8",
                 "detour": "Proxy"
             },
             {
                 "tag": "local_dns",
-                "address": "https://223.5.5.5/dns-query",
+                "type": "https",
+                "server": "https://223.5.5.5/dns-query",
                 "detour": "Direct"
             }
         ],
