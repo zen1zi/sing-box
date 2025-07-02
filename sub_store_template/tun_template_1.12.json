@@ -443,6 +443,9 @@
     "route": {
         "auto_detect_interface": true,
         "final": "Proxy",
+        "default_domain_resolver": {
+            "server": "proxy_dns"
+        },
         "rules": [
             {
                 "action": "sniff"
