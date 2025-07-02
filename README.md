@@ -1,42 +1,101 @@
 # Sing-Box Configuration Template
 
-This repository contains a personal [sing-box](https://sing-box.sagernet.org/) configuration template designed for advanced routing and flexibility. It is intended to be used with a subscription converter tool like [Sub-Store](https://github.com/sub-store-org/Sub-Store) to generate a complete, runnable configuration file.
+A sophisticated [sing-box](https://sing-box.sagernet.org/) configuration template engineered for advanced routing scenarios and maximum flexibility. This template is designed to work seamlessly with subscription converter tools like [Sub-Store](https://github.com/sub-store-org/Sub-Store) to generate production-ready configuration files.
 
-## Key Features
+## ✨ Key Features
 
-- **TUN Mode:** Configured for transparent proxying on `172.20.0.1/30`.
-- **Advanced DNS Routing:** Separate DNS for domestic (`local_dns`) and foreign (`proxy_dns`) domains to optimize speed and accuracy.
-- **Fine-grained Policy Routing:** Includes numerous policy groups (`selector`) for popular services like Netflix, Google, Spotify, AIGC, and more, allowing for specific node selection for each service.
-- **Remote Rule Sets:** Leverages remote `rule_set` files for automatic updates to routing rules, including custom rules hosted within this repository.
-- **Clash API Compatibility:** Features an integrated Clash API for easy management via external UI dashboards (e.g., Yacd, Metacubexd).
-- **Optimized for Performance:** Caching for DNS and FakeIP is enabled to reduce latency.
+- **🌐 TUN Mode Support:** Transparent proxying configured on `172.20.0.1/30` for system-wide traffic capture
+- **🎯 Intelligent DNS Routing:** Dual DNS architecture with separate resolvers for domestic (`local_dns`) and international (`proxy_dns`) domains
+- **🔧 Granular Policy Management:** Comprehensive policy groups for major services including Netflix, Google, Spotify, AI platforms, and more
+- **📡 Dynamic Rule Sets:** Remote rule sets with automatic updates for continuously optimized routing rules
+- **⚡ Clash API Integration:** Built-in Clash API support for seamless management via external dashboards (Yacd, Metacubexd)
+- **🚀 Performance Optimized:** Advanced DNS caching and FakeIP configuration for minimal latency
 
-## How to Use
+## 🚀 Quick Start
 
-This is **not** a standalone configuration. It is a template that requires your proxy subscription details to be injected into it.
+> **Important:** This is a configuration template, not a standalone config. It requires your proxy subscription to function.
 
-1.  **Get a Subscription Converter:** Use a tool like [Sub-Store](https://github.com/sub-store-org/Sub-Store).
-2.  **Import the Template:** Add the URL of the `sub_store_template/tun_template_1.11.json` file from this repository as your configuration template in the converter.
-3.  **Add Your Subscription:** Add your proxy subscription link to the converter.
-4.  **Generate the Configuration:** The converter will merge your subscription nodes with this template to produce a final, complete `config.json` file.
-5.  **Use the Generated File:** Use the generated configuration file with your sing-box client.
+### Prerequisites
+- A subscription converter tool (recommended: [Sub-Store](https://github.com/sub-store-org/Sub-Store))
+- A valid proxy subscription from your service provider
 
-## File Structure
+### Setup Instructions
 
-- **`sub_store_template/`**: Contains the main `sing-box` configuration template (`tun_template_1.11.json`). This is the file you should point your subscription converter to.
-- **`rule_set/`**: Contains custom rule sets used by the main template. These are fetched remotely by `sing-box` based on the URLs defined in the template.
-  - `emby.json`
-  - `eu.json`
-  - `iso.json`
-  - `spark.json`
+1. **Install Sub-Store or similar converter**
+2. **Import this template:**
+   - Use the raw URL of `sub_store_template/tun_template_1.11.json`
+3. **Configure your subscription:**
+   - Add your proxy subscription link to the converter
+4. **Generate configuration:**
+   - The converter will merge your nodes with this template
+5. **Deploy to sing-box:**
+   - Use the generated `config.json` with your sing-box client
 
-## Policy Groups
+## 📁 Repository Structure
 
-The template includes the following selector and url-test groups, which will be populated by your subscription converter:
+```
+├── sub_store_template/
+│   └── tun_template_1.11.json    # Main configuration template
+└── rule_set/                     # Custom routing rules
+    ├── emby.json                 # Emby media server rules
+    ├── eu.json                   # European region rules
+    ├── iso.json                  # ISO/International rules
+    └── spark.json                # Spark email client rules
+```
 
-- **Service-Specific Selectors:** `China`, `Nintendo`, `Microsoft`, `Google`, `Apple`, `Github`, `AIGC`, `Spotify`, `Disney+`, `Netflix`, `TikTok`, `YouTube`, `Bilibili`, `Emby`, `Telegram`, `Dropbox`, `Spark`, `PayPal`, `LinkedIn`, `Slack`.
-- **Region-Specific Selectors:** `Others`, `Europe`, `Korea`, `Japan`, `Hong Kong`, `Taiwan`, `United States`, `Singapore`.
-- **Functional Groups:**
-  - `Proxy`: A selector for all your proxy nodes.
-  - `Auto`: A `url-test` group for automatic node selection based on latency.
-  - `Direct`: A direct connection outbound.
+### Template File
+- **`sub_store_template/tun_template_1.11.json`**: Core configuration template compatible with sing-box v1.11+
+
+### Rule Sets
+- **`rule_set/`**: Custom rule definitions automatically fetched by sing-box for dynamic routing updates
+
+## 🎛️ Policy Groups
+
+The template provides comprehensive routing policies organized into three categories:
+
+### 🌍 Service-Specific Policies
+Dedicated selectors for optimal service routing:
+- **Streaming:** `Netflix`, `Disney+`, `YouTube`, `Bilibili`, `Spotify`, `Emby`
+- **Technology:** `Google`, `Apple`, `Microsoft`, `Github`
+- **Communication:** `Telegram`, `Slack`, `LinkedIn`
+- **Productivity:** `Dropbox`, `Spark`, `PayPal`
+- **Gaming:** `Nintendo`
+- **AI Services:** `AIGC` (AI/GPT services)
+- **Social Media:** `TikTok`
+
+### 🗺️ Regional Selectors
+Geographic routing options:
+- **Asia-Pacific:** `Hong Kong`, `Taiwan`, `Japan`, `Korea`, `Singapore`
+- **Americas:** `United States`
+- **Europe:** `Europe`
+- **Domestic:** `China`
+- **Fallback:** `Others`
+
+### ⚙️ Functional Groups
+Core routing mechanics:
+- **`Proxy`**: Manual node selection interface
+- **`Auto`**: Latency-based automatic selection (`url-test`)
+- **`Direct`**: Bypass proxy for local traffic
+
+## 🔧 Advanced Configuration
+
+### DNS Configuration
+- **Local DNS**: `223.5.5.5`, `119.29.29.29` for domestic domains
+- **Proxy DNS**: `1.1.1.1`, `8.8.8.8` for international domains
+- **FakeIP**: Enabled for enhanced performance
+
+### API Management
+- **Clash API**: `http://127.0.0.1:9090`
+- **Web UI**: Compatible with Yacd, Metacubexd, and other Clash dashboards
+
+## 📝 License
+
+This project is available under the MIT License. Feel free to modify and distribute according to your needs.
+
+## 🤝 Contributing
+
+Contributions are welcome! Please feel free to submit issues or pull requests to improve this template.
+
+---
+
+> **Disclaimer**: This template is for educational and personal use. Ensure compliance with your local laws and service provider terms when using proxy services.
