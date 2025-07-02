@@ -20,7 +20,7 @@
         ],
         "rules": [
             {
-                "outbound": "any",
+                "rule_set": "geosite-geolocation-!cn",
                 "server": "local_dns"
             },
             {
