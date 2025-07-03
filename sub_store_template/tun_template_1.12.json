@@ -3,6 +3,18 @@
         "level": "debug",
         "timestamp": true
     },
+    "experimental": {
+        "cache_file": {
+            "enabled": true,
+            "store_fakeip": true
+        },
+        "clash_api": {
+            "external_controller": "127.0.0.1:9090",
+            "external_ui": "ui",
+            "external_ui_download_detour": "Proxy",
+            "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+        }
+    },
     "dns": {
         "servers": [
             {
@@ -22,18 +34,6 @@
         "independent_cache": false,
         "final": "proxy_dns",
         "strategy": "prefer_ipv4"
-    },
-    "experimental": {
-        "cache_file": {
-            "enabled": true,
-            "store_fakeip": true
-        },
-        "clash_api": {
-            "external_controller": "127.0.0.1:9090",
-            "external_ui": "ui",
-            "external_ui_download_detour": "Proxy",
-            "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
-        }
     },
     "inbounds": [
         {
