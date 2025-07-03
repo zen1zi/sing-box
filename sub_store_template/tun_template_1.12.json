@@ -13,7 +13,8 @@
             },
             {
                 "tag": "local_dns",
-                "address": "https://223.5.5.5/dns-query",
+                "type": "https",
+                "server": "223.5.5.5",
                 "detour": "Direct"
             }
         ],
@@ -63,11 +64,12 @@
     },
     "inbounds": [
         {
+            "type": "tun",
             "address": [
                 "172.20.0.1/30"
             ],
             "auto_route": true,
-            "type": "tun"
+            "strict_route": true
         }
     ],
     "outbounds": [
