@@ -435,10 +435,6 @@
                 "outbound": "Proxy"
             },
             {
-                "domain_suffix": ["cfexcloud.com"],
-                "outbound": "Direct"
-            },
-            {
                 "rule_set": ["geosite-slack"],
                 "outbound": "Slack"
             },
