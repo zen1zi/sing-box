@@ -435,7 +435,7 @@
                 "outbound": "Proxy"
             },
             {
-                "domain-suffix": ["cfexcloud.com"],
+                "domain_suffix": ["cfexcloud.com"],
                 "outbound": "Direct"
             },
             {
