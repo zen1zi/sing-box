@@ -7,8 +7,7 @@
         "servers": [
             {
                 "tag": "proxy_dns",
-                "type": "tls",
-                "server": "8.8.8.8"
+                "address": "tls://8.8.8.8",
                 "detour": "Proxy"
             },
             {
