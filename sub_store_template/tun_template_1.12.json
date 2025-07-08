@@ -381,6 +381,7 @@
         {
             "tag": "Proxy",
             "type": "selector",
+            "url": "http://www.gstatic.com/generate_204",
             "outbounds": []
         },
         {
