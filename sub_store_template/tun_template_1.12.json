@@ -40,7 +40,6 @@
             "default": "Direct",
             "outbounds": [
                 "Direct",
-                "Auto",
                 "Proxy"
             ]
         },
@@ -57,7 +56,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy",
                 "Direct"
             ]
@@ -75,7 +73,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy",
                 "Direct"
             ]
@@ -93,7 +90,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy"
             ]
         },
@@ -110,7 +106,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy",
                 "Direct"
             ]
@@ -128,7 +123,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy"
             ]
         },
@@ -145,7 +139,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy"
             ]
         },
@@ -162,7 +155,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy",
                 "Direct"
             ]
@@ -180,7 +172,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy"
             ]
         },
@@ -197,7 +188,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy"
             ]
         },
@@ -214,7 +204,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy"
             ]
         },
@@ -231,7 +220,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy"
             ]
         },
@@ -258,7 +246,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy",
                 "Direct"
             ]
@@ -272,7 +259,6 @@
                 "United States",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy"
             ]
         },
@@ -289,7 +275,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy"
             ]
         },
@@ -306,7 +291,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy"
             ]
         },
@@ -323,7 +307,7 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
+
                 "Proxy",
                 "Direct"
             ]
@@ -341,7 +325,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-                "Auto",
                 "Proxy"
             ]
         },
@@ -351,7 +334,6 @@
             "default": "Hong Kong",
             "outbounds": [
                 "Hong Kong",
-                "Auto",
                 "Proxy",
                 "Direct"
             ]
@@ -399,14 +381,6 @@
         {
             "tag": "Proxy",
             "type": "selector",
-            "outbounds": []
-        },
-        {
-            "tag": "Auto",
-            "type": "urltest",
-            "interval": "10m",
-            "tolerance": 1,
-            "url": "http://1.1.1.1/generate_204",
             "outbounds": []
         },
         {
