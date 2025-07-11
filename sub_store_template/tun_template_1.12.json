@@ -17,6 +17,32 @@
                 "server": "223.5.5.5"
             }
         ],
+        "rules": [
+            {
+                "outbound": "any",
+                "server": "local_dns"
+            },
+            {
+                "clash_mode": "Direct",
+                "server": "local_dns"
+            },
+            {
+                "clash_mode": "Global",
+                "server": "proxy_dns"
+            },
+            {
+                "rule_set": [
+                    "geosite-cn"
+                ],
+                "server": "local_dns"
+            },
+            {
+                "rule_set": [
+                    "geosite-geolocation-!cn"
+                ],
+                "server": "proxy_dns"
+            }
+        ],
         "disable_cache": false,
         "disable_expire": false,
         "independent_cache": false,
