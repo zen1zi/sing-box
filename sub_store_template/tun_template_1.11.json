@@ -562,8 +562,8 @@
                 "outbound": "Nintendo"
             },
             {
-                "rule_set": ["ruleset-eu"],
-                "outbound": "Europe"
+                "rule_set": ["ruleset-personal"],
+                "outbound": "Singapore"
             },
             {
                 "rule_set": ["geosite-geolocation-!cn"],
@@ -747,10 +747,10 @@
                 "download_detour": "Proxy"
             },
             {
-                "tag": "ruleset-eu",
+                "tag": "ruleset-personal",
                 "type": "remote",
                 "format": "source",
-                "url": "https://raw.githubusercontent.com/zen1zi/sing-box/refs/heads/main/rule_set/eu.json",
+                "url": "https://raw.githubusercontent.com/zen1zi/sing-box/refs/heads/main/rule_set/personal.json",
                 "download_detour": "Proxy"
             },
             {

@@ -1,25 +1,45 @@
 {
     "log": {
-        "level": "warn",
+        "disabled": false,
+        "level": "info",
+        "output": "sing-box.log",
         "timestamp": true
     },
     "dns": {
         "servers": [
             {
                 "tag": "proxy_dns",
-                "type": "tls",
-                "server": "8.8.8.8",
+                "type": "https",
+                "server": "1.1.1.1",
                 "detour": "Proxy"
             },
             {
                 "tag": "local_dns",
                 "type": "https",
-                "server": "223.5.5.5"
+                "server": "223.6.6.6"
             }
         ],
-        "disable_cache": false,
-        "disable_expire": false,
-        "independent_cache": false,
+        "rules": [
+            {
+                "clash_mode": "Direct",
+                "action": "route",
+                "server": "local_dns"
+            },
+            {
+                "clash_mode": "Global",
+                "action": "route",
+                "server": "proxy_dns"
+            },
+            {
+                "rule_set": [
+                    "geoip-cn",
+                    "geosite-cn"
+                ],
+                "action": "route",
+                "server": "local_dns"
+            }
+        ],
+        "independent_cache": true,
         "final": "proxy_dns",
         "strategy": "prefer_ipv4"
     },
@@ -236,7 +256,7 @@
         {
             "tag": "Emby",
             "type": "selector",
-            "default": "Hong Kong",
+            "default": "Japan",
             "outbounds": [
                 "Singapore",
                 "United States",
@@ -258,14 +278,13 @@
                 "Singapore",
                 "United States",
                 "Europe",
-                "Others",
                 "Proxy"
             ]
         },
         {
             "tag": "Dropbox",
             "type": "selector",
-            "default": "Hong Kong",
+            "default": "Japan",
             "outbounds": [
                 "Singapore",
                 "United States",
@@ -281,7 +300,7 @@
         {
             "tag": "Spark",
             "type": "selector",
-            "default": "Hong Kong",
+            "default": "Japan",
             "outbounds": [
                 "Singapore",
                 "United States",
@@ -307,7 +326,6 @@
                 "Korea",
                 "Europe",
                 "Others",
-
                 "Proxy",
                 "Direct"
             ]
@@ -331,10 +349,16 @@
         {
             "tag": "Slack",
             "type": "selector",
-            "default": "Hong Kong",
+            "default": "Japan",
             "outbounds": [
+                "Singapore",
+                "United States",
+                "Taiwan",
                 "Hong Kong",
-                "Proxy",
+                "Japan",
+                "Korea",
+                "Europe",
+                "Others",
                 "Direct"
             ]
         },
@@ -390,46 +414,76 @@
     ],
     "route": {
         "auto_detect_interface": true,
-        "default_domain_resolver": "proxy_dns",
+        "default_domain_resolver": "local_dns",
         "final": "Proxy",
         "rules": [
             {
-                "action": "sniff"
+                "action": "sniff",
+                "sniffer": [
+                    "http",
+                    "tls",
+                    "quic",
+                    "dns"
+                ],
+                "timeout": "500ms"
+                
             },
             {
-                "protocol": "dns",
+                "type": "logical",
+                "mode": "or",
+                "rules": [
+                    {
+                        "port": 53
+                    },
+                    {
+                        "protocol": "dns"
+                    }
+                ],
                 "action": "hijack-dns"
             },
             {
+                "ip_is_private": true,
+                "action": "route",
+                "outbound": "direct"
+            },
+            {
                 "clash_mode": "Direct",
+                "action": "route",
                 "outbound": "Direct"
             },
             {
                 "clash_mode": "Global",
+                "action": "route",
                 "outbound": "Proxy"
             },
             {
                 "rule_set": ["geosite-slack"],
+                "action": "route",
                 "outbound": "Slack"
             },
             {
                 "rule_set": ["ruleset-iso"],
+                "action": "route",
                 "outbound": "United States"
             },
             {
                 "rule_set": ["geosite-linkedin"],
+                "action": "route",
                 "outbound": "LinkedIn"
             },
             {
                 "rule_set": ["geosite-paypal"],
+                "action": "route",
                 "outbound": "PayPal"
             },
             {
                 "rule_set": ["ruleset-spark"],
+                "action": "route",
                 "outbound": "Spark"
             },
             {
                 "rule_set": ["geosite-dropbox"],
+                "action": "route",
                 "outbound": "Dropbox"
             },
             {
@@ -437,22 +491,27 @@
                     "geoip-telegram",
                     "geosite-telegram"
                 ],
+                "action": "route",
                 "outbound": "Telegram"
             },
             {
                 "rule_set": ["ruleset-emby"],
+                "action": "route",
                 "outbound": "Emby"
             },
             {
                 "rule_set": ["geosite-bilibili"],
+                "action": "route",
                 "outbound": "Bilibili"
             },
             {
                 "rule_set": ["geosite-youtube"],
+                "action": "route",
                 "outbound": "YouTube"
             },
             {
                 "rule_set": ["geosite-tiktok"],
+                "action": "route",
                 "outbound": "TikTok"
             },
             {
@@ -460,22 +519,27 @@
                     "geoip-netflix",
                     "geosite-netflix"
                 ],
+                "action": "route",
                 "outbound": "Netflix"
             },
             {
                 "rule_set": ["geosite-disney"],
+                "action": "route",
                 "outbound": "Disney+"
             },
             {
                 "rule_set": ["geosite-spotify"],
+                "action": "route",
                 "outbound": "Spotify"
             },
             {
                 "rule_set": ["ruleset-ai"],
+                "action": "route",
                 "outbound": "AIGC"
             },
             {
                 "rule_set": ["geosite-github"],
+                "action": "route",
                 "outbound": "Github"
             },
             {
@@ -483,6 +547,7 @@
                     "geoip-apple",
                     "geosite-apple"
                 ],
+                "action": "route",
                 "outbound": "Apple"
             },
             {
@@ -490,22 +555,27 @@
                     "geoip-google",
                     "geosite-google"
                 ],
+                "action": "route",
                 "outbound": "Google"
             },
             {
                 "rule_set": ["geosite-microsoft"],
+                "action": "route",
                 "outbound": "Microsoft"
             },
             {
                 "rule_set": ["geosite-nintendo"],
+                "action": "route",
                 "outbound": "Nintendo"
             },
             {
-                "rule_set": ["ruleset-eu"],
-                "outbound": "Europe"
+                "rule_set": ["ruleset-personal"],
+                "action": "route",
+                "outbound": "Singapore"
             },
             {
                 "rule_set": ["geosite-geolocation-!cn"],
+                "action": "route",
                 "outbound": "Proxy"
             },
             {
@@ -513,6 +583,7 @@
                     "geoip-cn",
                     "geosite-cn"
                 ],
+                "action": "route",
                 "outbound": "China"
             }
         ],
@@ -686,10 +757,10 @@
                 "download_detour": "Proxy"
             },
             {
-                "tag": "ruleset-eu",
+                "tag": "ruleset-personal",
                 "type": "remote",
                 "format": "source",
-                "url": "https://raw.githubusercontent.com/zen1zi/sing-box/refs/heads/main/rule_set/eu.json",
+                "url": "https://raw.githubusercontent.com/zen1zi/sing-box/refs/heads/main/rule_set/personal.json",
                 "download_detour": "Proxy"
             },
             {

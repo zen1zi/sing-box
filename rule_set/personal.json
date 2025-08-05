@@ -4,11 +4,12 @@
     {
       "domain": [],
       "domain_suffix": [
-        "nodeseek.com",
-        "lowendtalk.com",
         "zenitsu.io",
+        "ewc.sh"
         "eton.sh",
-        "zenitsu.network"
+        "zenitsu.network",
+        "gnar.sh",
+        
       ],
       "domain_keyword": [],
       "domain_regex": [],
