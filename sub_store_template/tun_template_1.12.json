@@ -131,6 +131,23 @@
             ]
         },
         {
+            "tag": "Reddit",
+            "type": "selector",
+            "default": "United States",
+            "outbounds": [
+                "Singapore",
+                "United States",
+                "Taiwan",
+                "Hong Kong",
+                "Japan",
+                "Korea",
+                "Europe",
+                "Others",
+                "Proxy",
+                "Direct"
+            ]
+        },
+        {
             "tag": "Github",
             "type": "selector",
             "default": "Proxy",
@@ -282,6 +299,23 @@
             ]
         },
         {
+            "tag": "Notion",
+            "type": "selector",
+            "default": "Japan",
+            "outbounds": [
+                "Singapore",
+                "United States",
+                "Taiwan",
+                "Hong Kong",
+                "Japan",
+                "Korea",
+                "Europe",
+                "Others",
+                "Proxy",
+                "Direct"
+            ]
+        },
+        {
             "tag": "Dropbox",
             "type": "selector",
             "default": "Japan",
@@ -311,6 +345,23 @@
                 "Europe",
                 "Others",
                 "Proxy"
+            ]
+        },
+        {
+            "tag": "Crypto",
+            "type": "selector",
+            "default": "Taiwan",
+            "outbounds": [
+                "Singapore",
+                "United States",
+                "Taiwan",
+                "Hong Kong",
+                "Japan",
+                "Korea",
+                "Europe",
+                "Others",
+                "Proxy",
+                "Direct"
             ]
         },
         {
@@ -754,6 +805,27 @@
                 "type": "remote",
                 "format": "binary",
                 "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/nintendo.srs",
+                "download_detour": "Proxy"
+            },
+            {
+                "tag": "geosite-notion",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/notion.srs",
+                "download_detour": "Proxy"
+            },
+            {
+                "tag": "geosite-crypto",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-cryptocurrency.srs",
+                "download_detour": "Proxy"
+            },
+            {
+                "tag": "geosite-reddit",
+                "type": "remote",
+                "format": "binary",
+                "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/reddit.srs",
                 "download_detour": "Proxy"
             },
             {
