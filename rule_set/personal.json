@@ -5,11 +5,10 @@
       "domain": [],
       "domain_suffix": [
         "zenitsu.io",
-        "ewc.sh"
+        "ewc.sh",
         "eton.sh",
         "zenitsu.network",
-        "gnar.sh",
-        
+        "gnar.sh"
       ],
       "domain_keyword": [],
       "domain_regex": [],
