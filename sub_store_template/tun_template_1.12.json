@@ -495,7 +495,7 @@
       {
         "ip_is_private": true,
         "action": "route",
-        "outbound": "direct"
+        "outbound": "Direct"
       },
       {
         "clash_mode": "Direct",
