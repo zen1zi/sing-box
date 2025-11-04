@@ -40,7 +40,7 @@
             }
         ],
         "independent_cache": true,
-        "final": "proxy_dns",
+        "final": "local_dns",
         "strategy": "prefer_ipv4"
     },
     "inbounds": [
