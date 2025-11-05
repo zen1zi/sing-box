@@ -5,18 +5,36 @@
     "output": "sing-box.log",
     "timestamp": true
   },
+  "experimental": {
+    "cache_file": {
+      "enabled": true,
+      "store_fakeip": true
+    },
+    "clash_api": {
+      "external_controller": "127.0.0.1:9090",
+      "external_ui": "ui",
+      "external_ui_download_detour": "Proxy",
+      "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
+    }
+  },
   "dns": {
     "servers": [
       {
         "tag": "proxy_dns",
         "type": "https",
-        "server": "1.1.1.1",
+        "server": "8.8.8.8",
         "detour": "Proxy"
       },
       {
         "tag": "local_dns",
         "type": "https",
-        "server": "223.6.6.6"
+        "server": "223.5.5.5"
+      },
+      {
+        "tag": "fakeip",
+        "type": "fakeip",
+        "inet4_range": "198.18.0.0/15",
+        "inet6_range": "fc00::/18"
       }
     ],
     "rules": [
@@ -28,7 +46,17 @@
       {
         "clash_mode": "Global",
         "action": "route",
-        "server": "proxy_dns"
+        "server": "fakeip"
+      },
+      {
+        "query_type": "HTTPS",
+        "action": "reject"
+      },
+      {
+        "query_type": ["A", "AAAA"],
+        "action": "route",
+        "server": "fakeip",
+        "rewrite_ttl": 1
       },
       {
         "rule_set": ["geoip-cn", "geosite-cn"],
@@ -37,49 +65,98 @@
       }
     ],
     "independent_cache": true,
-    "final": "local_dns",
-    "strategy": "prefer_ipv4"
+    "final": "proxy_dns"
   },
   "inbounds": [
     {
+      "type": "tun",
+      "address": ["172.19.0.0/30", "fdfe:dcba:9876::0/126"],
+      "stack": "mixed",
       "auto_route": true,
-      "endpoint_independent_nat": true,
-      "address": ["172.19.0.1\/30", "2001:0470:f9da:fdfa::1\/64"],
-      "mtu": 9000,
-      "sniff": true,
-      "sniff_override_destination": true,
-      "stack": "system",
-      "strict_route": true,
-      "type": "tun"
+      "platform": {
+        "http_proxy": {
+          "enabled": true,
+          "server": "127.0.0.1",
+          "server_port": 7890
+        }
+      }
     },
     {
-      "listen": "127.0.0.1",
-      "listen_port": 2333,
-      "sniff": true,
-      "sniff_override_destination": true,
-      "tag": "socks-in",
-      "type": "socks",
-      "users": []
-    },
-    {
-      "listen": "127.0.0.1",
-      "listen_port": 2334,
-      "sniff": true,
-      "sniff_override_destination": true,
-      "tag": "mixed-in",
       "type": "mixed",
-      "users": []
+      "listen": "127.0.0.1",
+      "listen_port": 7890
     }
   ],
   "outbounds": [
     {
-      "tag": "China",
+      "tag": "Proxy",
       "type": "selector",
-      "default": "Direct",
-      "outbounds": ["Direct", "Proxy"]
+      "outbounds": []
     },
     {
-      "tag": "Nintendo",
+      "tag": "Singapore",
+      "type": "selector",
+      "outbounds": []
+    },
+    {
+      "tag": "United States",
+      "type": "selector",
+      "outbounds": []
+    },
+    {
+      "tag": "Taiwan",
+      "type": "selector",
+      "outbounds": []
+    },
+    {
+      "tag": "Hong Kong",
+      "type": "selector",
+      "outbounds": []
+    },
+    {
+      "tag": "Japan",
+      "type": "selector",
+      "outbounds": []
+    },
+    {
+      "tag": "Korea",
+      "type": "selector",
+      "outbounds": []
+    },
+    {
+      "tag": "Europe",
+      "type": "selector",
+      "outbounds": []
+    },
+    {
+      "tag": "Others",
+      "type": "selector",
+      "outbounds": []
+    },
+    {
+      "tag": "Slack",
+      "type": "selector",
+      "default": "Japan",
+      "outbounds": [
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Korea",
+        "Europe",
+        "Others",
+        "Direct"
+      ]
+    },
+    {
+      "tag": "Telegram",
+      "type": "selector",
+      "default": "Singapore",
+      "outbounds": ["Singapore", "United States", "Europe", "Proxy"]
+    },
+    {
+      "tag": "Emby",
       "type": "selector",
       "default": "Japan",
       "outbounds": [
@@ -96,141 +173,9 @@
       ]
     },
     {
-      "tag": "Microsoft",
+      "tag": "YouTube",
       "type": "selector",
       "default": "Proxy",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy",
-        "Direct"
-      ]
-    },
-    {
-      "tag": "Google",
-      "type": "selector",
-      "default": "Proxy",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy"
-      ]
-    },
-    {
-      "tag": "Apple",
-      "type": "selector",
-      "default": "Proxy",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy",
-        "Direct"
-      ]
-    },
-    {
-      "tag": "Reddit",
-      "type": "selector",
-      "default": "United States",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy",
-        "Direct"
-      ]
-    },
-    {
-      "tag": "Github",
-      "type": "selector",
-      "default": "Proxy",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy"
-      ]
-    },
-    {
-      "tag": "AIGC",
-      "type": "selector",
-      "default": "United States",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy"
-      ]
-    },
-    {
-      "tag": "Spotify",
-      "type": "selector",
-      "default": "Taiwan",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy",
-        "Direct"
-      ]
-    },
-    {
-      "tag": "Disney+",
-      "type": "selector",
-      "default": "Singapore",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy"
-      ]
-    },
-    {
-      "tag": "Netflix",
-      "type": "selector",
-      "default": "Singapore",
       "outbounds": [
         "Singapore",
         "United States",
@@ -260,9 +205,15 @@
       ]
     },
     {
-      "tag": "YouTube",
+      "tag": "Bilibili",
       "type": "selector",
-      "default": "Proxy",
+      "default": "Direct",
+      "outbounds": ["Direct", "Hong Kong", "Taiwan"]
+    },
+    {
+      "tag": "Netflix",
+      "type": "selector",
+      "default": "Singapore",
       "outbounds": [
         "Singapore",
         "United States",
@@ -276,15 +227,25 @@
       ]
     },
     {
-      "tag": "Bilibili",
+      "tag": "Disney+",
       "type": "selector",
-      "default": "Direct",
-      "outbounds": ["Direct", "Hong Kong", "Taiwan"]
+      "default": "Singapore",
+      "outbounds": [
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Korea",
+        "Europe",
+        "Others",
+        "Proxy"
+      ]
     },
     {
-      "tag": "Emby",
+      "tag": "Spotify",
       "type": "selector",
-      "default": "Japan",
+      "default": "Taiwan",
       "outbounds": [
         "Singapore",
         "United States",
@@ -297,12 +258,6 @@
         "Proxy",
         "Direct"
       ]
-    },
-    {
-      "tag": "Telegram",
-      "type": "selector",
-      "default": "Singapore",
-      "outbounds": ["Singapore", "United States", "Europe", "Proxy"]
     },
     {
       "tag": "Notion",
@@ -388,6 +343,56 @@
       ]
     },
     {
+      "tag": "AIGC",
+      "type": "selector",
+      "default": "United States",
+      "outbounds": [
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Korea",
+        "Europe",
+        "Others",
+        "Proxy"
+      ]
+    },
+    {
+      "tag": "Nintendo",
+      "type": "selector",
+      "default": "Japan",
+      "outbounds": [
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Korea",
+        "Europe",
+        "Others",
+        "Proxy",
+        "Direct"
+      ]
+    },
+    {
+      "tag": "Reddit",
+      "type": "selector",
+      "default": "United States",
+      "outbounds": [
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Korea",
+        "Europe",
+        "Others",
+        "Proxy",
+        "Direct"
+      ]
+    },
+    {
       "tag": "LinkedIn",
       "type": "selector",
       "default": "Singapore",
@@ -404,9 +409,9 @@
       ]
     },
     {
-      "tag": "Slack",
+      "tag": "Apple",
       "type": "selector",
-      "default": "Japan",
+      "default": "Proxy",
       "outbounds": [
         "Singapore",
         "United States",
@@ -416,53 +421,48 @@
         "Korea",
         "Europe",
         "Others",
+        "Proxy",
         "Direct"
       ]
     },
     {
-      "tag": "Others",
+      "tag": "Google",
       "type": "selector",
-      "outbounds": []
+      "default": "Proxy",
+      "outbounds": [
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Korea",
+        "Europe",
+        "Others",
+        "Proxy"
+      ]
     },
     {
-      "tag": "Europe",
+      "tag": "Microsoft",
       "type": "selector",
-      "outbounds": []
+      "default": "Proxy",
+      "outbounds": [
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Korea",
+        "Europe",
+        "Others",
+        "Proxy",
+        "Direct"
+      ]
     },
     {
-      "tag": "Korea",
+      "tag": "China",
       "type": "selector",
-      "outbounds": []
-    },
-    {
-      "tag": "Japan",
-      "type": "selector",
-      "outbounds": []
-    },
-    {
-      "tag": "Hong Kong",
-      "type": "selector",
-      "outbounds": []
-    },
-    {
-      "tag": "Taiwan",
-      "type": "selector",
-      "outbounds": []
-    },
-    {
-      "tag": "United States",
-      "type": "selector",
-      "outbounds": []
-    },
-    {
-      "tag": "Singapore",
-      "type": "selector",
-      "outbounds": []
-    },
-    {
-      "tag": "Proxy",
-      "type": "selector",
-      "outbounds": []
+      "default": "Direct",
+      "outbounds": ["Direct", "Proxy"]
     },
     {
       "tag": "Direct",
@@ -511,11 +511,6 @@
         "rule_set": ["geosite-slack"],
         "action": "route",
         "outbound": "Slack"
-      },
-      {
-        "rule_set": ["ruleset-iso"],
-        "action": "route",
-        "outbound": "United States"
       },
       {
         "rule_set": ["geosite-linkedin"],
@@ -583,9 +578,9 @@
         "outbound": "AIGC"
       },
       {
-        "rule_set": ["geosite-github"],
+        "rule_set": ["geosite-nintendo"],
         "action": "route",
-        "outbound": "Github"
+        "outbound": "Nintendo"
       },
       {
         "rule_set": ["geoip-apple", "geosite-apple"],
@@ -603,9 +598,9 @@
         "outbound": "Microsoft"
       },
       {
-        "rule_set": ["geosite-nintendo"],
+        "rule_set": ["ruleset-iso"],
         "action": "route",
-        "outbound": "Nintendo"
+        "outbound": "United States"
       },
       {
         "rule_set": ["ruleset-personal"],
@@ -744,13 +739,6 @@
         "download_detour": "Proxy"
       },
       {
-        "tag": "geosite-github",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/github.srs",
-        "download_detour": "Proxy"
-      },
-      {
         "tag": "geoip-apple",
         "type": "remote",
         "format": "binary",
@@ -842,17 +830,5 @@
         "download_detour": "Proxy"
       }
     ]
-  },
-  "experimental": {
-    "cache_file": {
-      "enabled": true,
-      "store_fakeip": true
-    },
-    "clash_api": {
-      "external_controller": "127.0.0.1:9090",
-      "external_ui": "ui",
-      "external_ui_download_detour": "Proxy",
-      "external_ui_download_url": "https://github.com/MetaCubeX/metacubexd/archive/refs/heads/gh-pages.zip"
-    }
   }
 }
