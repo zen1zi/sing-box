@@ -197,6 +197,12 @@
       ]
     },
     {
+      "tag": "Bilibili",
+      "type": "selector",
+      "default": "Direct",
+      "outbounds": ["Direct", "Hong Kong", "Taiwan"]
+    },
+    {
       "tag": "YouTube",
       "type": "selector",
       "default": "Proxy",
@@ -231,12 +237,6 @@
         "Proxy",
         "Direct"
       ]
-    },
-    {
-      "tag": "Bilibili",
-      "type": "selector",
-      "default": "Direct",
-      "outbounds": ["Direct", "Hong Kong", "Taiwan"]
     },
     {
       "tag": "Netflix",
@@ -653,20 +653,6 @@
         "download_detour": "Proxy"
       },
       {
-        "tag": "geosite-netflix",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/netflix.srs",
-        "download_detour": "Proxy"
-      },
-      {
-        "tag": "geosite-disney",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/disney.srs",
-        "download_detour": "Proxy"
-      },
-      {
         "tag": "geosite-youtube",
         "type": "remote",
         "format": "binary",
@@ -678,6 +664,20 @@
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/tiktok.srs",
+        "download_detour": "Proxy"
+      },
+      {
+        "tag": "geosite-netflix",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/netflix.srs",
+        "download_detour": "Proxy"
+      },
+      {
+        "tag": "geosite-disney",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/disney.srs",
         "download_detour": "Proxy"
       },
       {
