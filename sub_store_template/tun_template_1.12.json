@@ -8,7 +8,11 @@
   "experimental": {
     "cache_file": {
       "enabled": true,
-      "store_fakeip": true
+      "path": "cache.db",
+      "cache_id": "",
+      "store_fakeip": true,
+      "store_rdrc": true,
+      "rdrc_timeout": "7d"
     },
     "clash_api": {
       "external_controller": "127.0.0.1:9090",
@@ -29,12 +33,6 @@
         "tag": "local_dns",
         "type": "https",
         "server": "223.5.5.5"
-      },
-      {
-        "tag": "fakeip",
-        "type": "fakeip",
-        "inet4_range": "198.18.0.0/15",
-        "inet6_range": "fc00::/18"
       }
     ],
     "rules": [
@@ -46,17 +44,7 @@
       {
         "clash_mode": "Global",
         "action": "route",
-        "server": "fakeip"
-      },
-      {
-        "query_type": "HTTPS",
-        "action": "reject"
-      },
-      {
-        "query_type": ["A", "AAAA"],
-        "action": "route",
-        "server": "fakeip",
-        "rewrite_ttl": 1
+        "server": "proxy_dns"
       },
       {
         "rule_set": ["geoip-cn", "geosite-cn"],
@@ -64,33 +52,55 @@
         "server": "local_dns"
       }
     ],
-    "independent_cache": true,
+    "disable_cache": false,
+    "disable_expire": false,
+    "independent_cache": false,
     "final": "proxy_dns"
   },
   "inbounds": [
     {
       "type": "tun",
-      "address": ["172.19.0.0/30", "fdfe:dcba:9876::0/126"],
-      "stack": "mixed",
+      "tag": "tun-in",
+      "interface_name": "",
+      "address": ["172.18.0.1/30", "fdfe:dcba:9876::1/126"],
+      "mtu": 1400,
       "auto_route": true,
+      "strict_route": true,
+      "endpoint_independent_nat": false,
+      "stack": "mixed",
       "platform": {
         "http_proxy": {
           "enabled": true,
           "server": "127.0.0.1",
-          "server_port": 7890
+          "server_port": 20122
         }
       }
     },
     {
       "type": "mixed",
+      "tag": "mixed-in",
       "listen": "127.0.0.1",
-      "listen_port": 7890
+      "listen_port": 20122,
+      "tcp_fast_open": true,
+      "tcp_multi_path": true,
+      "udp_fragment": false
     }
   ],
   "outbounds": [
     {
-      "tag": "Proxy",
-      "type": "selector",
+      "tag": "Direct",
+      "type": "direct"
+    },
+    {
+      "tag": "Block",
+      "type": "block"
+    },
+    {
+      "tag": "Auto",
+      "type": "urltest",
+      "url": "https://www.gstatic.com/generate_204",
+      "interval": "5m",
+      "tolerance": 50,
       "outbounds": []
     },
     {
@@ -134,10 +144,11 @@
       "outbounds": []
     },
     {
-      "tag": "Slack",
+      "tag": "Proxy",
       "type": "selector",
-      "default": "Japan",
+      "default": "Singapore",
       "outbounds": [
+        "Auto",
         "Singapore",
         "United States",
         "Taiwan",
@@ -150,16 +161,29 @@
       ]
     },
     {
-      "tag": "Telegram",
-      "type": "selector",
-      "default": "Singapore",
-      "outbounds": ["Singapore", "United States", "Europe", "Proxy"]
-    },
-    {
-      "tag": "Emby",
+      "tag": "Slack",
       "type": "selector",
       "default": "Japan",
       "outbounds": [
+        "Auto",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Korea",
+        "Europe",
+        "Others",
+        "Proxy",
+        "Direct"
+      ]
+    },
+    {
+      "tag": "Telegram",
+      "type": "selector",
+      "default": "Singapore",
+      "outbounds": [
+        "Auto",
         "Singapore",
         "United States",
         "Taiwan",
@@ -177,76 +201,7 @@
       "type": "selector",
       "default": "Proxy",
       "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy"
-      ]
-    },
-    {
-      "tag": "TikTok",
-      "type": "selector",
-      "default": "Proxy",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy"
-      ]
-    },
-    {
-      "tag": "Bilibili",
-      "type": "selector",
-      "default": "Direct",
-      "outbounds": ["Direct", "Hong Kong", "Taiwan"]
-    },
-    {
-      "tag": "Netflix",
-      "type": "selector",
-      "default": "Singapore",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy"
-      ]
-    },
-    {
-      "tag": "Disney+",
-      "type": "selector",
-      "default": "Singapore",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy"
-      ]
-    },
-    {
-      "tag": "Spotify",
-      "type": "selector",
-      "default": "Taiwan",
-      "outbounds": [
+        "Auto",
         "Singapore",
         "United States",
         "Taiwan",
@@ -260,10 +215,71 @@
       ]
     },
     {
-      "tag": "Notion",
+      "tag": "TikTok",
       "type": "selector",
-      "default": "Japan",
+      "default": "Proxy",
       "outbounds": [
+        "Auto",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Korea",
+        "Europe",
+        "Others",
+        "Proxy",
+        "Direct"
+      ]
+    },
+    {
+      "tag": "Bilibili",
+      "type": "selector",
+      "default": "Direct",
+      "outbounds": ["Direct", "Hong Kong", "Taiwan"]
+    },
+    {
+      "tag": "Netflix",
+      "type": "selector",
+      "default": "Singapore",
+      "outbounds": [
+        "Auto",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Korea",
+        "Europe",
+        "Others",
+        "Proxy",
+        "Direct"
+      ]
+    },
+    {
+      "tag": "Disney+",
+      "type": "selector",
+      "default": "Singapore",
+      "outbounds": [
+        "Auto",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Korea",
+        "Europe",
+        "Others",
+        "Proxy",
+        "Direct"
+      ]
+    },
+    {
+      "tag": "Spotify",
+      "type": "selector",
+      "default": "Taiwan",
+      "outbounds": [
+        "Auto",
         "Singapore",
         "United States",
         "Taiwan",
@@ -281,6 +297,7 @@
       "type": "selector",
       "default": "Japan",
       "outbounds": [
+        "Auto",
         "Singapore",
         "United States",
         "Taiwan",
@@ -289,23 +306,8 @@
         "Korea",
         "Europe",
         "Others",
-        "Proxy"
-      ]
-    },
-    {
-      "tag": "Spark",
-      "type": "selector",
-      "default": "Japan",
-      "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy"
+        "Proxy",
+        "Direct"
       ]
     },
     {
@@ -313,6 +315,7 @@
       "type": "selector",
       "default": "Taiwan",
       "outbounds": [
+        "Auto",
         "Singapore",
         "United States",
         "Taiwan",
@@ -330,6 +333,7 @@
       "type": "selector",
       "default": "United States",
       "outbounds": [
+        "Auto",
         "Singapore",
         "United States",
         "Taiwan",
@@ -343,26 +347,11 @@
       ]
     },
     {
-      "tag": "AIGC",
+      "tag": "AI",
       "type": "selector",
       "default": "United States",
       "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy"
-      ]
-    },
-    {
-      "tag": "Nintendo",
-      "type": "selector",
-      "default": "Japan",
-      "outbounds": [
+        "Auto",
         "Singapore",
         "United States",
         "Taiwan",
@@ -380,6 +369,7 @@
       "type": "selector",
       "default": "United States",
       "outbounds": [
+        "Auto",
         "Singapore",
         "United States",
         "Taiwan",
@@ -397,6 +387,7 @@
       "type": "selector",
       "default": "Singapore",
       "outbounds": [
+        "Auto",
         "Singapore",
         "United States",
         "Taiwan",
@@ -405,14 +396,16 @@
         "Korea",
         "Europe",
         "Others",
-        "Proxy"
+        "Proxy",
+        "Direct"
       ]
     },
     {
       "tag": "Apple",
       "type": "selector",
-      "default": "Proxy",
+      "default": "Direct",
       "outbounds": [
+        "Auto",
         "Singapore",
         "United States",
         "Taiwan",
@@ -428,24 +421,9 @@
     {
       "tag": "Google",
       "type": "selector",
-      "default": "Proxy",
+      "default": "United States",
       "outbounds": [
-        "Singapore",
-        "United States",
-        "Taiwan",
-        "Hong Kong",
-        "Japan",
-        "Korea",
-        "Europe",
-        "Others",
-        "Proxy"
-      ]
-    },
-    {
-      "tag": "Microsoft",
-      "type": "selector",
-      "default": "Proxy",
-      "outbounds": [
+        "Auto",
         "Singapore",
         "United States",
         "Taiwan",
@@ -459,14 +437,40 @@
       ]
     },
     {
-      "tag": "China",
+      "tag": "Microsoft",
       "type": "selector",
-      "default": "Direct",
-      "outbounds": ["Direct", "Proxy"]
+      "default": "United States",
+      "outbounds": [
+        "Auto",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Korea",
+        "Europe",
+        "Others",
+        "Proxy",
+        "Direct"
+      ]
     },
     {
-      "tag": "Direct",
-      "type": "direct"
+      "tag": "CN",
+      "type": "selector",
+      "default": "Direct",
+      "outbounds": [
+        "Auto",
+        "Singapore",
+        "United States",
+        "Taiwan",
+        "Hong Kong",
+        "Japan",
+        "Korea",
+        "Europe",
+        "Others",
+        "Proxy",
+        "Direct"
+      ]
     }
   ],
   "route": {
@@ -476,21 +480,16 @@
     "rules": [
       {
         "action": "sniff",
-        "sniffer": ["http", "tls", "quic", "dns"],
-        "timeout": "500ms"
+        "inbound": ["tun-in"]
       },
       {
-        "type": "logical",
-        "mode": "or",
-        "rules": [
-          {
-            "port": 53
-          },
-          {
-            "protocol": "dns"
-          }
-        ],
-        "action": "hijack-dns"
+        "action": "hijack-dns",
+        "protocol": "dns"
+      },
+      {
+        "rule_set": ["geosite-category-ads-all"],
+        "action": "route",
+        "outbound": "Block"
       },
       {
         "ip_is_private": true,
@@ -523,11 +522,6 @@
         "outbound": "PayPal"
       },
       {
-        "rule_set": ["ruleset-spark"],
-        "action": "route",
-        "outbound": "Spark"
-      },
-      {
         "rule_set": ["geosite-dropbox"],
         "action": "route",
         "outbound": "Dropbox"
@@ -536,11 +530,6 @@
         "rule_set": ["geoip-telegram", "geosite-telegram"],
         "action": "route",
         "outbound": "Telegram"
-      },
-      {
-        "rule_set": ["ruleset-emby"],
-        "action": "route",
-        "outbound": "Emby"
       },
       {
         "rule_set": ["geosite-bilibili"],
@@ -558,7 +547,7 @@
         "outbound": "TikTok"
       },
       {
-        "rule_set": ["geoip-netflix", "geosite-netflix"],
+        "rule_set": ["geosite-netflix"],
         "action": "route",
         "outbound": "Netflix"
       },
@@ -575,12 +564,17 @@
       {
         "rule_set": ["ruleset-ai"],
         "action": "route",
-        "outbound": "AIGC"
+        "outbound": "AI"
       },
       {
-        "rule_set": ["geosite-nintendo"],
+        "rule_set": ["geosite-crypto"],
         "action": "route",
-        "outbound": "Nintendo"
+        "outbound": "Crypto"
+      },
+      {
+        "rule_set": ["geosite-reddit"],
+        "action": "route",
+        "outbound": "Reddit"
       },
       {
         "rule_set": ["geoip-apple", "geosite-apple"],
@@ -598,16 +592,6 @@
         "outbound": "Microsoft"
       },
       {
-        "rule_set": ["ruleset-iso"],
-        "action": "route",
-        "outbound": "United States"
-      },
-      {
-        "rule_set": ["ruleset-personal"],
-        "action": "route",
-        "outbound": "Singapore"
-      },
-      {
         "rule_set": ["geosite-geolocation-!cn"],
         "action": "route",
         "outbound": "Proxy"
@@ -615,7 +599,7 @@
       {
         "rule_set": ["geoip-cn", "geosite-cn"],
         "action": "route",
-        "outbound": "China"
+        "outbound": "CN"
       }
     ],
     "rule_set": [
@@ -624,13 +608,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/slack.srs",
-        "download_detour": "Proxy"
-      },
-      {
-        "tag": "ruleset-iso",
-        "type": "remote",
-        "format": "source",
-        "url": "https://raw.githubusercontent.com/zen1zi/sing-box/refs/heads/main/rule_set/iso.json",
         "download_detour": "Proxy"
       },
       {
@@ -645,13 +622,6 @@
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/paypal.srs",
-        "download_detour": "Proxy"
-      },
-      {
-        "tag": "ruleset-spark",
-        "type": "remote",
-        "format": "source",
-        "url": "https://raw.githubusercontent.com/zen1zi/sing-box/refs/heads/main/rule_set/spark.json",
         "download_detour": "Proxy"
       },
       {
@@ -676,38 +646,10 @@
         "download_detour": "Proxy"
       },
       {
-        "tag": "ruleset-emby",
-        "type": "remote",
-        "format": "source",
-        "url": "https://raw.githubusercontent.com/zen1zi/sing-box/refs/heads/main/rule_set/emby.json",
-        "download_detour": "Proxy"
-      },
-      {
         "tag": "geosite-bilibili",
         "type": "remote",
         "format": "binary",
         "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/bilibili.srs",
-        "download_detour": "Proxy"
-      },
-      {
-        "tag": "geosite-youtube",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs",
-        "download_detour": "Proxy"
-      },
-      {
-        "tag": "geosite-tiktok",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/tiktok.srs",
-        "download_detour": "Proxy"
-      },
-      {
-        "tag": "geoip-netflix",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geoip/netflix.srs",
         "download_detour": "Proxy"
       },
       {
@@ -725,6 +667,20 @@
         "download_detour": "Proxy"
       },
       {
+        "tag": "geosite-youtube",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/youtube.srs",
+        "download_detour": "Proxy"
+      },
+      {
+        "tag": "geosite-tiktok",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/tiktok.srs",
+        "download_detour": "Proxy"
+      },
+      {
         "tag": "geosite-spotify",
         "type": "remote",
         "format": "binary",
@@ -736,6 +692,20 @@
         "type": "remote",
         "format": "source",
         "url": "https://ruleset.skk.moe/sing-box/non_ip/ai.json",
+        "download_detour": "Proxy"
+      },
+      {
+        "tag": "geosite-crypto",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-cryptocurrency.srs",
+        "download_detour": "Proxy"
+      },
+      {
+        "tag": "geosite-reddit",
+        "type": "remote",
+        "format": "binary",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/reddit.srs",
         "download_detour": "Proxy"
       },
       {
@@ -774,38 +744,10 @@
         "download_detour": "Proxy"
       },
       {
-        "tag": "geosite-nintendo",
+        "tag": "geosite-category-ads-all",
         "type": "remote",
         "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/nintendo.srs",
-        "download_detour": "Proxy"
-      },
-      {
-        "tag": "geosite-notion",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/notion.srs",
-        "download_detour": "Proxy"
-      },
-      {
-        "tag": "geosite-crypto",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-cryptocurrency.srs",
-        "download_detour": "Proxy"
-      },
-      {
-        "tag": "geosite-reddit",
-        "type": "remote",
-        "format": "binary",
-        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/reddit.srs",
-        "download_detour": "Proxy"
-      },
-      {
-        "tag": "ruleset-personal",
-        "type": "remote",
-        "format": "source",
-        "url": "https://raw.githubusercontent.com/zen1zi/sing-box/refs/heads/main/rule_set/personal.json",
+        "url": "https://raw.githubusercontent.com/MetaCubeX/meta-rules-dat/sing/geo/geosite/category-ads-all.srs",
         "download_detour": "Proxy"
       },
       {
