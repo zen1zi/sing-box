@@ -25,13 +25,12 @@
     "servers": [
       {
         "tag": "proxy_dns",
-        "type": "https",
-        "server": "8.8.8.8",
-        "detour": "Proxy"
+        "type": "tls",
+        "server": "8.8.8.8"
       },
       {
         "tag": "local_dns",
-        "type": "https",
+        "type": "udp",
         "server": "223.5.5.5"
       }
     ],
@@ -475,7 +474,7 @@
   ],
   "route": {
     "auto_detect_interface": true,
-    "default_domain_resolver": "local_dns",
+    "default_domain_resolver": "proxy_dns",
     "final": "Proxy",
     "rules": [
       {
