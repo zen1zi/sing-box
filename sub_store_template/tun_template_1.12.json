@@ -25,7 +25,7 @@
     "servers": [
       {
         "tag": "proxy_dns",
-        "type": "tls",
+        "type": "udp",
         "server": "8.8.8.8"
       },
       {
